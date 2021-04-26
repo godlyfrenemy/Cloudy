@@ -5,8 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:cloudy"
         mc:Ignorable="d"
-        Title="Cloudy" Height="1080" Width="1920" SizeToContent="WidthAndHeight" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" UseLayoutRounding="False" BorderThickness="0">
-    <Label x:Name="WindowLabel" Content="UserInterface" VerticalAlignment="Top" Height="84" Background="#FFFFCCE6" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="50" FlowDirection="RightToLeft" FontFamily="Consolas"
-           />
+        Title="Cloudy" Height="1080" Width="1920" SizeToContent="WidthAndHeight" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="0" UseLayoutRounding="False" BorderThickness="1" FontFamily="Consolas" MinWidth="640" MinHeight="480">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition MinWidth="384" Width="160*"/>
+            <ColumnDefinition MinWidth="256" Width="79*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="45*" MinHeight="84"/>
+            <RowDefinition Height="479*" MinHeight="400"/>
+        </Grid.RowDefinitions>
+        <Label x:Name="WindowLabel" Content="UserInterface" Background="#FFFFCCE6" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="50" FlowDirection="RightToLeft" FontFamily="Consolas" MinHeight="80" Grid.ColumnSpan="2" Margin="0,0,0,6.4"/>
+        
+    </Grid>
 </Window>
     
