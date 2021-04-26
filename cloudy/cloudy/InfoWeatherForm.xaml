@@ -5,18 +5,83 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:cloudy"
         mc:Ignorable="d"
-        Title="Cloudy" Height="1080" Width="1920" SizeToContent="WidthAndHeight" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="0" UseLayoutRounding="False" BorderThickness="1" FontFamily="Consolas" MinWidth="640" MinHeight="480">
-    <Grid>
+        Title="Cloudy" Height="1080" Width="1920" SizeToContent="WidthAndHeight" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="0" UseLayoutRounding="False" BorderThickness="1" FontFamily="Consolas" MinWidth="640" MinHeight="480" Background="#FFE8D3D3" BorderBrush="#FF8FCAF4" Icon="icon.ico">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border"  CornerRadius="10" Background="{TemplateBinding Background}" BorderBrush="#FF6FCEFF" BorderThickness="2">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" TargetName="border">
+                                    <Setter.Value>
+                                        <RadialGradientBrush GradientOrigin="0.496,1.052">
+                                            <RadialGradientBrush.RelativeTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="1.5" ScaleY="1.5"/>
+                                                    <TranslateTransform X="0.02" Y="0.3"/>
+                                                </TransformGroup>
+                                            </RadialGradientBrush.RelativeTransform>
+                                            <GradientStop Color="#00000000" Offset="1"/>
+                                            <GradientStop Color="#FF303030" Offset="0.3"/>
+                                        </RadialGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FF33962B"/>
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Margin" Value="10,5"/>
+            <Setter Property="Background" Value="#FFE3B6B6"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid Grid.IsSharedSizeScope="True" ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition MinWidth="384" Width="160*"/>
-            <ColumnDefinition MinWidth="256" Width="79*"/>
+            <ColumnDefinition MinWidth="384" Width="145*"/>
+            <ColumnDefinition MinWidth="256" Width="94*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="45*" MinHeight="84"/>
             <RowDefinition Height="479*" MinHeight="400"/>
         </Grid.RowDefinitions>
-        <Label x:Name="WindowLabel" Content="UserInterface" Background="#FFFFCCE6" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="50" FlowDirection="RightToLeft" FontFamily="Consolas" MinHeight="80" Grid.ColumnSpan="2" Margin="0,0,0,6.4"/>
-        
+        <Label x:Name="WindowLabel" Content="UserInterface" Background="#FFFFCCE6" Padding="0" HorizontalContentAlignment="Center" FontSize="40" FlowDirection="RightToLeft" FontFamily="Consolas" MinHeight="60" Grid.ColumnSpan="2" MaxHeight="80" VerticalContentAlignment="Center" VerticalAlignment="Top" Height="60" />
+        <DataGrid x:Name="Table" RowBackground="LightGray" AlternatingRowBackground="White" Grid.Row="1" Background="#FFEBC3C1" Margin="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" IsSynchronizedWithCurrentItem="True" FontSize="20" UseLayoutRounding="False" BorderBrush="#FF8FCAF4" HorizontalGridLinesBrush="#FF8FCAF4" VerticalGridLinesBrush="#FF8FCAF4" CanUserReorderColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Місто" Binding="{Binding city}"/>
+                <DataGridTextColumn Header="Число" Binding="{Binding day}"/>
+                <DataGridTextColumn Header="Місяць" Binding="{Binding month}"/>
+                <DataGridTextColumn Header="Температура" Binding="{Binding temperature}"/>
+                <DataGridTextColumn Header="Наявність опадів" Binding="{Binding precipitation}"/>
+                <DataGridTextColumn Header="Тиск" Binding="{Binding pressure}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid Grid.Row="1" Grid.Column="1" Margin="14,19.6,20,19.8" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition MinWidth="120"/>
+                <ColumnDefinition MinWidth="100"/>
+                <ColumnDefinition MinWidth="100"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="65*" MinHeight="60"/>
+                <RowDefinition Height="854*" MinHeight="80"/>
+            </Grid.RowDefinitions>
+
+            <Button x:Name="EditButton" Content="Редагувати"/>
+            <Button x:Name="DeleteButton" Content="Видалити" Grid.Column="1" />
+            <Button x:Name="AddButton" Content="Додати" Grid.Column="2"/>
+        </Grid>
     </Grid>
 </Window>
     
