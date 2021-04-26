@@ -1,0 +1,12 @@
+﻿<Window x:Name="InfoWeatherForm" x:Class="cloudy.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:cloudy"
+        mc:Ignorable="d"
+        Title="Cloudy" Height="1080" Width="1920" SizeToContent="WidthAndHeight" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" UseLayoutRounding="False" BorderThickness="0">
+    <Label x:Name="WindowLabel" Content="UserInterface" VerticalAlignment="Top" Height="84" Background="#FFFFCCE6" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="50" FlowDirection="RightToLeft" FontFamily="Consolas"
+           />
+</Window>
+    
