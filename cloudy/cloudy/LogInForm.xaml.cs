@@ -10,31 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace cloudy
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для LogInForm.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class LogInForm : Window
     {
-        public MainWindow()
+        public LogInForm()
         {
             InitializeComponent();
-            LogInForm logInForm = new LogInForm();
-            logInForm.Show();
-        }
-
-        private void AddButton_Click(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
-        private void SaveButton_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

@@ -1,0 +1,68 @@
+﻿<Window x:Name="LogInForm1" x:Class="cloudy.LogInForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:cloudy"
+        mc:Ignorable="d"
+        Title="LogIn" Height="400" Width="450" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" FontFamily="Comic Sans MS" FontSize="15" BorderBrush="#FFB85450" BorderThickness="1" WindowStyle="ThreeDBorderWindow">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border"  CornerRadius="10" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" TargetName="border">
+                                    <Setter.Value>
+                                        <RadialGradientBrush GradientOrigin="0.496,1.052">
+                                            <RadialGradientBrush.RelativeTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="1.5" ScaleY="1.5"/>
+                                                    <TranslateTransform X="0.02" Y="0.3"/>
+                                                </TransformGroup>
+                                            </RadialGradientBrush.RelativeTransform>
+                                            <GradientStop Color="#00000000" Offset="1"/>
+                                            <GradientStop Color="#FF303030" Offset="0.3"/>
+                                        </RadialGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FF6FCEFF"/>
+                                <Setter Property="BorderThickness" TargetName="border" Value="2"/>
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Margin" Value="10,5"/>
+            <Setter Property="Background" Value="#FFE3B6B6"/>
+        </Style>
+
+    </Window.Resources>
+
+    <Grid Background="#FFF8CECC" Margin="0,0,-0.4,-8.2">
+
+        <TextBlock FontFamily="Comic Sans MS" FontSize="30" Margin="110,50,82,285" HorizontalAlignment="Center" Width="250" VerticalAlignment="Center" Text=" АВТОРИЗАЦІЯ"/>
+
+        <!--Логин-->
+        <TextBlock FontFamily="Comic Sans MS" FontSize="20" Margin="60,126,282,221" HorizontalAlignment="Center" Width="100" VerticalAlignment="Center" Height="30" Text=" ЛОГІН"/>
+        <TextBox x:Name="login" Width="215" Height="54" Margin="174,126,53,197" HorizontalAlignment="Center" BorderBrush="Black" VerticalAlignment="Center" AcceptsReturn="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+        <!--Пароль-->
+        <TextBox  x:Name="password" Width="215" Height="55" Margin="174,180,53,142" HorizontalAlignment="Center" BorderBrush="Black" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <TextBlock FontFamily="Comic Sans MS" FontSize="20" Margin="51,180,282,167" HorizontalAlignment="Center" Width="109" VerticalAlignment="Center" Height="30" Text=" ПАРОЛЬ "/>
+
+        <Button  x:Name="Enter" Content="ВХІД" FontFamily="Comic Sans MS" FontSize="15" Margin="70,253,252,72" RenderTransformOrigin="0.485,1.347" Background="#FFFF9999"/>
+        <!--Пользователь-->
+        <Button x:Name="Continue" Background="#FFFF9999" Content="СКАСУВАТИ" Margin="223,253,62,72" RenderTransformOrigin="0.5,0.5" FontFamily="Comic Sans MS" FontSize="15"/>
+    </Grid>
+</Window>
+
