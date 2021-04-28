@@ -19,9 +19,29 @@ namespace cloudy
     /// </summary>
     public partial class LogInForm : Window
     {
+
         public LogInForm()
         {
-            InitializeComponent();
+            InitializeComponent();  
         }
+
+        private void Continue_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void Enter_Click(object sender, RoutedEventArgs e)
+        {           
+            if(MainWindow.authorization.CheckLogIn(login.Text, password.Text))
+            {
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Не верно");
+            }
+        }
+
+      
     }
 }

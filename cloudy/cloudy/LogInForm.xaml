@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:cloudy"
         mc:Ignorable="d"
-        Title="LogIn" Height="400" Width="450" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" FontFamily="Comic Sans MS" FontSize="15" BorderBrush="#FFB85450" BorderThickness="1" WindowStyle="ThreeDBorderWindow">
+        Title="LogIn" Height="400" Width="450" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" FontFamily="Comic Sans MS" FontSize="15" BorderBrush="#FFB85450" BorderThickness="1" WindowStyle="ToolWindow" SizeToContent="WidthAndHeight">
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="Template">
@@ -55,14 +55,14 @@
 
         <!--Логин-->
         <TextBlock FontFamily="Comic Sans MS" FontSize="20" Margin="60,126,282,221" HorizontalAlignment="Center" Width="100" VerticalAlignment="Center" Height="30" Text=" ЛОГІН"/>
-        <TextBox x:Name="login" Width="215" Height="54" Margin="174,126,53,197" HorizontalAlignment="Center" BorderBrush="Black" VerticalAlignment="Center" AcceptsReturn="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+        <TextBox x:Name="login" Width="215" Height="39" Margin="174,122,53,216" HorizontalAlignment="Center" BorderBrush="Black" VerticalAlignment="Center" AcceptsReturn="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
         <!--Пароль-->
-        <TextBox  x:Name="password" Width="215" Height="55" Margin="174,180,53,142" HorizontalAlignment="Center" BorderBrush="Black" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <TextBox  x:Name="password" Width="215" Height="40" Margin="174,175,53,162" HorizontalAlignment="Center" BorderBrush="Black" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         <TextBlock FontFamily="Comic Sans MS" FontSize="20" Margin="51,180,282,167" HorizontalAlignment="Center" Width="109" VerticalAlignment="Center" Height="30" Text=" ПАРОЛЬ "/>
 
-        <Button  x:Name="Enter" Content="ВХІД" FontFamily="Comic Sans MS" FontSize="15" Margin="70,253,252,72" RenderTransformOrigin="0.485,1.347" Background="#FFFF9999"/>
+        <Button  x:Name="Enter" Content="ВХІД" FontFamily="Comic Sans MS" FontSize="15" Margin="70,253,252,72" RenderTransformOrigin="0.485,1.347" Background="#FFFF9999" Click="Enter_Click" IsDefault="True"/>
         <!--Пользователь-->
-        <Button x:Name="Continue" Background="#FFFF9999" Content="СКАСУВАТИ" Margin="223,253,62,72" RenderTransformOrigin="0.5,0.5" FontFamily="Comic Sans MS" FontSize="15"/>
+        <Button x:Name="Continue" Background="#FFFF9999" Content="СКАСУВАТИ" Margin="223,253,62,72" RenderTransformOrigin="0.5,0.5" FontFamily="Comic Sans MS" FontSize="15" Click="Continue_Click" IsCancel="True"/>
     </Grid>
 </Window>
 

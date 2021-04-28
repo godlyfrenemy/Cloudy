@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:cloudy"
              StartupUri="InfoWeatherForm.xaml">
     <Application.Resources>
-         
+        
     </Application.Resources>
 </Application>
