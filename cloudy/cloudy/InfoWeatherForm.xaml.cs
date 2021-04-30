@@ -20,9 +20,9 @@ namespace cloudy
     /// </summary>
     public partial class MainWindow : Window
     {
-
         public static Authorization authorization = new Authorization();
-        private List<Weather> weathers;
+        private List<Weather> weathers { get; set; }
+        private DataAccess dataAccess;
 
         public void ToggleDisplay()
         {
@@ -39,23 +39,27 @@ namespace cloudy
         public MainWindow()
         {
             InitializeComponent();
-            weathers = new List<Weather>
+            dataAccess = new DataAccess();
+
+            weathers = new List<Weather> { };
+            List<Weather> result = dataAccess.GetWeathers();
+
+            if(result == null)
             {
-                new Weather("Краснопілля", DateTime.Now.Day, DateTime.Now.Month, 15, "Есть", 920),
-                new Weather("Суми", DateTime.Now.Day, DateTime.Now.Month, 16, "Есть", 900),
-                new Weather("Бездрик", DateTime.Now.Day, DateTime.Now.Month, 17, "Есть", 910),
-                new Weather("Київ", DateTime.Now.Day, DateTime.Now.Month, 10, "Нету", 920),
-                new Weather("Харків", DateTime.Now.Day, DateTime.Now.Month, 15, "Есть", 920)
-            };
-            foreach(var element in weathers)
+                MessageBox.Show("Empty");
+            }
+            else
             {
-                WeatherTable.Items.Add(element);
+                foreach (Weather element in result)
+                {
+                    AddToList(element);
+                }
             }
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            AddToList(new Weather(city_box.Text, day_box.Text, month_box.Text, temp_box.Text, precip_box.Text, pressure_box.Text));
+            AddToList(new Weather(city_box.Text, Convert.ToInt16(day_box.Text), month_box.Text, Convert.ToInt16(temp_box.Text), precip_box.Text, Convert.ToUInt32(pressure_box.Text)));
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
@@ -70,6 +74,7 @@ namespace cloudy
 
         private void WeatherTable_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+
         }
 
         private void LogInButton_Click(object sender, RoutedEventArgs e)
@@ -80,6 +85,29 @@ namespace cloudy
             {
                 ToggleDisplay();
             }
+        }
+
+        private void EditButton_Click(object sender, RoutedEventArgs e)
+        {
+            List<Weather> result = dataAccess.GetWeathers("Красопілля", "Квітень");
+            if(result == null)
+            {
+                MessageBox.Show("Empty");
+            }
+            else
+            {
+                WeatherTable.Items.Clear();
+                weathers = new List<Weather> { };
+                foreach( Weather element in result)
+                {
+                    AddToList(element);
+                }
+            }
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
