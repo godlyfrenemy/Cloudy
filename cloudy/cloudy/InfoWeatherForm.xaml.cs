@@ -22,19 +22,8 @@ namespace cloudy
     {
         public static Authorization authorization = new Authorization();
         private List<Weather> weathers { get; set; }
+
         private DataAccess dataAccess;
-
-        public void ToggleDisplay()
-        {
-            EditForm.Visibility = (EditForm.Visibility == Visibility.Visible) ? Visibility.Hidden : Visibility.Visible;
-            LogInButton.Visibility = (LogInButton.Visibility == Visibility.Visible) ? Visibility.Hidden : Visibility.Visible;
-        }
-
-        private void AddToList(Weather weather)
-        {
-            WeatherTable.Items.Add(weather);
-            weathers.Add(weather);
-        }
 
         public MainWindow()
         {
@@ -57,22 +46,33 @@ namespace cloudy
             }
         }
 
+        public void ToggleDisplay()
+        {
+            EditForm.Visibility = (EditForm.Visibility == Visibility.Visible) ? Visibility.Hidden : Visibility.Visible;
+            LogInButton.Visibility = (LogInButton.Visibility == Visibility.Visible) ? Visibility.Hidden : Visibility.Visible;
+        }
+
+        private void AddToList(Weather weather)
+        {
+            WeatherTable.Items.Add(weather);
+            weathers.Add(weather);
+        }
+
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            AddToList(new Weather(city_box.Text, Convert.ToInt16(day_box.Text), month_box.Text, Convert.ToInt16(temp_box.Text), precip_box.Text, Convert.ToUInt32(pressure_box.Text)));
+            Weather weather = new Weather(city_box.Text, Convert.ToInt16(day_box.Text), month_box.Text, Convert.ToInt16(temp_box.Text), precip_box.Text, Convert.ToUInt32(pressure_box.Text));
+            if (!dataAccess.AddToBase(weather))
+            {
+                MessageBox.Show("Wasn't added");
+            }
+            else
+            {
+                AddToList(weather);
+            }
+            
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void WeatherTable_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }
@@ -97,7 +97,7 @@ namespace cloudy
             else
             {
                 WeatherTable.Items.Clear();
-                weathers = new List<Weather> { };
+                weathers.Clear();
                 foreach( Weather element in result)
                 {
                     AddToList(element);
@@ -107,7 +107,20 @@ namespace cloudy
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-
+            //List<Weather> result = dataAccess.GetWeathers("Суми", "Січень");
+            //if(result == null)
+            //{
+            //    MessageBox.Show("Error");
+            //}
+            //else
+            //{
+            //    weathers.Clear();
+            //    WeatherTable.Items.Clear();
+            //    foreach (Weather element in result)
+            //    {
+            //        AddToList(element);
+            //    }
+            //}
         }
     }
 }
