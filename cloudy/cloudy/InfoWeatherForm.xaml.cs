@@ -58,6 +58,16 @@ namespace cloudy
             weathers.Add(weather);
         }
 
+        private void ClearBoxes()
+        {
+            city_box.Text = String.Empty;
+            day_box.Text = String.Empty;
+            month_box.Text = String.Empty;
+            precip_box.Text = String.Empty;
+            pressure_box.Text = String.Empty;
+            temp_box.Text = String.Empty;
+        }
+
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
             Weather weather = new Weather(city_box.Text, Convert.ToInt16(day_box.Text), month_box.Text, Convert.ToInt16(temp_box.Text), precip_box.Text, Convert.ToUInt32(pressure_box.Text));
@@ -68,19 +78,22 @@ namespace cloudy
             else
             {
                 AddToList(weather);
+
+                ClearBoxes();
             }
             
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-
+            ClearBoxes();
         }
 
         private void LogInButton_Click(object sender, RoutedEventArgs e)
         {
             LogInForm logInForm = new LogInForm();
             logInForm.ShowDialog();
+
             if(MainWindow.authorization.loged_in)
             {
                 ToggleDisplay();
@@ -89,20 +102,7 @@ namespace cloudy
 
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
-            List<Weather> result = dataAccess.GetWeathers("Красопілля", "Квітень");
-            if(result == null)
-            {
-                MessageBox.Show("Empty");
-            }
-            else
-            {
-                WeatherTable.Items.Clear();
-                weathers.Clear();
-                foreach( Weather element in result)
-                {
-                    AddToList(element);
-                }
-            }
+            
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
