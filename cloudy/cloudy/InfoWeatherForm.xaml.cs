@@ -33,6 +33,8 @@ namespace cloudy
             dataAccess = new DataAccess();
 
             LoadBase();
+
+            ToggleDisplay();
         }
 
         private bool LoadBase()

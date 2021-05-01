@@ -32,7 +32,7 @@ namespace cloudy
 
         private void Enter_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow.authorization.loged_in = MainWindow.authorization.CheckLogIn(login.Text, password.Text);
+            MainWindow.authorization.loged_in = MainWindow.authorization.CheckLogIn(login.Text.Trim(), password.Text.Trim());
             if (MainWindow.authorization.loged_in)
             {
                 this.Close();
