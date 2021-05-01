@@ -62,7 +62,9 @@ namespace cloudy
             {
 
                 command.CommandText = "INSERT INTO cloudy(city,date,month,temperature,precipitation,pressure) VALUES(@city, @date, @month, @temperature, @precipitation, @pressure)";
-               
+
+                command.Parameters.Clear();
+
                 command.Parameters.AddWithValue("@city", weather.city);
                 command.Parameters.AddWithValue("@date", weather.day);
                 command.Parameters.AddWithValue("@month", weather.month);
@@ -71,6 +73,27 @@ namespace cloudy
                 command.Parameters.AddWithValue("@pressure", weather.pressure);
                
                 command.ExecuteNonQuery();
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool DeleteFromBase(Weather weather)
+        {
+            try
+            {
+                command.CommandText = $"DELETE FROM cloudy WHERE city = '{weather.city}' AND date = {weather.day} " +
+                    $"AND month = '{weather.month}' AND temperature = {weather.temperature} AND precipitation = {(weather.precipitation == "Є" ? true : false)} " +
+                    $"AND pressure = {weather.pressure};";
+
+                if (command.ExecuteNonQuery() == 0)
+                {
+                    throw new Exception();
+                }
 
                 return true;
             }
