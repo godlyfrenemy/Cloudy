@@ -23,18 +23,31 @@ namespace cloudy
         public static Authorization authorization = new Authorization();
 
         private List<Weather> weathers { get; set; }
-        private Weather selectedWeather { get; set; }
+        private List<Weather> selectXYList { get; set; }
+        private List<Weather> rainDataList { get; set; }
 
-        private DataAccess dataAccess;
+        private Weather selectedWeather { get; set; }
+        private DataAccess dataAccess = new DataAccess();
         private string buttonPressed;
+
         public MainWindow()
         {
             InitializeComponent();
-            dataAccess = new DataAccess();
+        }
 
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
             LoadBase();
+        }
 
-            ToggleDisplay();
+        private void DisplayList(List<Weather> list)
+        {
+            WeatherTable.Items.Clear();
+
+            foreach(Weather element in list)
+            {
+                WeatherTable.Items.Add(element);
+            }
         }
 
         private bool LoadBase()
@@ -42,14 +55,14 @@ namespace cloudy
             try
             {
                 List<Weather> result = dataAccess.GetWeathers();
+                ClearList();
 
                 if (result == null)
                 {
-                    MessageBox.Show("База даних порожня", "Помилка!");
+                    MessageBox.Show("База даних порожня", "Увага!");
                 }
                 else
                 {
-                    ClearList();
                     foreach (Weather element in result)
                     {
                         AddToList(element);
@@ -69,7 +82,7 @@ namespace cloudy
         public void ToggleDisplay()
         {
             EditForm.Visibility = (EditForm.Visibility == Visibility.Visible) ? Visibility.Hidden : Visibility.Visible;
-            LogInButton.Visibility = (LogInButton.Visibility == Visibility.Visible) ? Visibility.Hidden : Visibility.Visible;
+            UserForm.Visibility = (UserForm.Visibility == Visibility.Visible) ? Visibility.Hidden : Visibility.Visible;
         }
 
         private void ClearList()
@@ -129,21 +142,30 @@ namespace cloudy
         {
             try
             {
+                if(buttonPressed == (string)EditButton.Content)
+                {
+                    throw new Exception("Увімкнутий режим редагування");
+                }
                 Weather weather = new Weather(city_box.Text, Convert.ToInt16(day_box.Text), month_box.Text, Convert.ToInt16(temp_box.Text), precip_box.Text, Convert.ToUInt32(pressure_box.Text));
 
-                if (dataAccess.AddToBase(weather))
+                int result = dataAccess.AddToBase(weather);
+                if (result == 1)
                 {
                     LoadBase();
                     ClearBoxes();
                 }
+                else if(result == 0)
+                {
+                    throw new Exception("Не вдалось додати запис");
+                }
                 else
                 {
-                    throw new Exception();
+                    throw new Exception("Записи на цю дату в даному місті вже існують");
                 }
             }
-            catch
+            catch(Exception ex)
             {
-                MessageBox.Show("Не вдалось додати запис", "Помилка!");
+                MessageBox.Show(ex.Message, "Помилка");
             }
                
         }
@@ -154,6 +176,7 @@ namespace cloudy
             {
                 if (buttonPressed == (string)EditButton.Content)
                 {
+                    buttonPressed = String.Empty;
                     DeleteFromList(selectedWeather); 
                     AddButton_Click(sender, e);
                 }
@@ -162,7 +185,6 @@ namespace cloudy
                     AddButton_Click(sender, e);
                 }
                 ClearBoxes();
-                buttonPressed = String.Empty;
                 WeatherTable.SelectedItem = null;
             }
             catch
@@ -231,20 +253,51 @@ namespace cloudy
                 MessageBox.Show("Ви не обрали запис", "Помилка!");
             }
 
-            //List<Weather> result = dataAccess.GetWeathers("Суми", "Січень");
-            //if(result == null)
-            //{
-            //    MessageBox.Show("Жоден запис не знайдено", "Помилка!");
-            //}
-            //else
-            //{
-            //    weathers.Clear();
-            //    WeatherTable.Items.Clear();
-            //    foreach (Weather element in result)
-            //    {
-            //        AddToList(element);
-            //    }
-            //}
+        }
+
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                selectXYList = dataAccess.SelectXY(city_x.Text, month_y.Text);
+                if(selectXYList == null)
+                {
+                    throw new Exception("Жодного запису не знайдено");
+                }
+                else
+                {
+                    ClearList();
+                    city_x.Text = String.Empty;
+                    month_y.Text = String.Empty;
+
+                    DisplayList(selectXYList);
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Помилка!");
+            }
+        }
+
+        private void SearchRainButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                rainDataList = dataAccess.GetRainData();
+
+                if (rainDataList == null)
+                {
+                    throw new Exception("Жодного запису не знайдено");
+                }
+                else
+                {
+                    DisplayList(rainDataList);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Помилка!");
+            }
         }
     }
 }
