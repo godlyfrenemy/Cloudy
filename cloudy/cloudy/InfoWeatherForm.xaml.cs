@@ -27,9 +27,14 @@ namespace cloudy
         private List<Weather> selectXYList { get; set; }
         private List<Weather> rainDataList { get; set; }
 
+        private SelectData selectData = new SelectData();
         private Weather selectedWeather { get; set; }
         private DataAccess dataAccess = new DataAccess();
+
         private string buttonPressed;
+
+        public static string selectedCity;
+        public static string selectedMonth;
 
         public MainWindow()
         {
@@ -38,6 +43,7 @@ namespace cloudy
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            this.Show();
             LoadBase();
         }
 
@@ -260,7 +266,10 @@ namespace cloudy
         {
             try
             {
-                selectXYList = dataAccess.SelectXY(city_x.Text, month_y.Text);
+                selectedCity = city_x.Text;
+                selectedMonth = month_y.Text;
+
+                selectXYList = dataAccess.SelectXY(selectedCity, selectedMonth);
                 if(selectXYList == null)
                 {
                     throw new Exception("Жодного запису не знайдено");
@@ -303,7 +312,18 @@ namespace cloudy
 
         private void ReportButton_Click(object sender, RoutedEventArgs e)
         {
-
+            try
+            {
+                if (selectedCity == String.Empty || selectedMonth == String.Empty)
+                {
+                    throw new Exception("Здійсніть спочатку пошук записів за містом та місяцем");
+                }
+                selectData.WriteData(selectXYList, rainDataList);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Помилка!", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
     }
 }
