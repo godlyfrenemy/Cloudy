@@ -124,13 +124,20 @@ namespace cloudy
 
         ~SelectData()
         {
-            if(wordDoc != null)
+            try
             {
-                wordDoc.Close(Microsoft.Office.Interop.Word.WdSaveOptions.wdPromptToSaveChanges);
+                if (wordDoc != null)
+                {
+                    wordDoc.Close(Microsoft.Office.Interop.Word.WdSaveOptions.wdPromptToSaveChanges);
+                }
+                if (wordApp != null)
+                {
+                    wordApp.Quit(Microsoft.Office.Interop.Word.WdSaveOptions.wdPromptToSaveChanges);
+                }
             }
-            if(wordApp != null)
+            catch (Exception ex)
             {
-                wordApp.Quit(Microsoft.Office.Interop.Word.WdSaveOptions.wdPromptToSaveChanges);
+                MessageBox.Show(ex.Message, "Помилка!", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
     }

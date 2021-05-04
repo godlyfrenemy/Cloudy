@@ -33,8 +33,8 @@ namespace cloudy
 
         private string buttonPressed;
 
-        public static string selectedCity;
-        public static string selectedMonth;
+        public static string selectedCity = String.Empty;
+        public static string selectedMonth = String.Empty;
 
         public MainWindow()
         {
@@ -317,6 +317,10 @@ namespace cloudy
                 if (selectedCity == String.Empty || selectedMonth == String.Empty)
                 {
                     throw new Exception("Здійсніть спочатку пошук записів за містом та місяцем");
+                }
+                if (rainDataList == null)
+                {
+                    rainDataList = dataAccess.GetRainData();
                 }
                 selectData.WriteData(selectXYList, rainDataList);
             }
