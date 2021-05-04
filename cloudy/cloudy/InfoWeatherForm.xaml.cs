@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace cloudy
 {
     /// <summary>
@@ -59,7 +60,7 @@ namespace cloudy
 
                 if (result == null)
                 {
-                    MessageBox.Show("База даних порожня", "Увага!");
+                    MessageBox.Show("База даних порожня", "Увага!", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
                 else
                 {
@@ -74,7 +75,7 @@ namespace cloudy
             }
             catch
             {
-                MessageBox.Show("Не вдалось прочитати базу даних", "Помилка!");
+                MessageBox.Show("Не вдалось прочитати базу даних", "Помилка!", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return false;
             }
         }
@@ -112,7 +113,7 @@ namespace cloudy
             }
             catch
             {
-                MessageBox.Show("Не вдалось додати запис", "Помилка!");
+                MessageBox.Show("Не вдалось додати запис", "Помилка!", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return false;
             }
         }
@@ -127,13 +128,13 @@ namespace cloudy
                 }
                 else
                 {
-                    MessageBox.Show("Не вдалось видалити запис з бази даних", "Помилка!");
+                    MessageBox.Show("Не вдалось видалити запис з бази даних", "Помилка!", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return false;
                 }
             }
             catch
             {
-                MessageBox.Show("Не вдалось видалити запис", "Помилка!");
+                MessageBox.Show("Не вдалось видалити запис", "Помилка!", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return false;
             }
         }
@@ -165,7 +166,7 @@ namespace cloudy
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.Message, "Помилка");
+                MessageBox.Show(ex.Message, "Помилка", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
                
         }
@@ -189,7 +190,7 @@ namespace cloudy
             }
             catch
             {
-                MessageBox.Show("Не вдалось зберегти запис", "Помилка!");
+                MessageBox.Show("Не вдалось зберегти запис", "Помилка!", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
@@ -227,7 +228,7 @@ namespace cloudy
             }
             catch
             {
-                MessageBox.Show("Ви не обрали запис", "Помилка!");
+                MessageBox.Show("Ви не обрали запис", "Помилка!", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
 
         }
@@ -250,7 +251,7 @@ namespace cloudy
             }
             catch
             {
-                MessageBox.Show("Ви не обрали запис", "Помилка!");
+                MessageBox.Show("Ви не обрали запис", "Помилка!", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
 
         }
@@ -275,7 +276,7 @@ namespace cloudy
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.Message, "Помилка!");
+                MessageBox.Show(ex.Message, "Помилка!", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
@@ -296,8 +297,13 @@ namespace cloudy
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Помилка!");
+                MessageBox.Show(ex.Message, "Помилка!", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
+        }
+
+        private void ReportButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

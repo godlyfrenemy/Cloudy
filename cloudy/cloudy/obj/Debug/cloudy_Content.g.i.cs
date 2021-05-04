@@ -8,7 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("cloudy.mdf")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("cloudy_log.ldf")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("image.png")]
 
 

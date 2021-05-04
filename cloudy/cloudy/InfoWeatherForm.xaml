@@ -5,13 +5,35 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:cloudy"
         mc:Ignorable="d"
-        Title="Cloudy" Height="720" Width="1280" SizeToContent="WidthAndHeight" FontSize="17px" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="0" UseLayoutRounding="False" BorderThickness="1" FontFamily="Consolas" MinWidth="640" MinHeight="480" Background="#FFE8D3D3" BorderBrush="#FF8FCAF4" Icon="icon.ico" Loaded="MainWindow_Loaded">
+        Title="Cloudy" Height="720" Width="1280" SizeToContent="WidthAndHeight" FontSize="17px" 
+        VerticalAlignment="Center" HorizontalAlignment="Center" Padding="0" UseLayoutRounding="False" 
+        BorderThickness="1" FontFamily="Consolas" MinWidth="640" MinHeight="480" Background="#FFE8D3D3" 
+        BorderBrush="#FF8FCAF4" Icon="icon.ico" Loaded="MainWindow_Loaded" WindowStartupLocation="CenterScreen">
     <Window.Resources>
+        <ControlTemplate x:Key="Rounded" TargetType="{x:Type TextBoxBase}">
+            <Border Background="{TemplateBinding Background}" 
+                x:Name="Bd" BorderBrush="Black"
+                BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="30">
+                <ScrollViewer x:Name="PART_ContentHost"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" TargetName="Bd"/>
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                </Trigger>
+                <Trigger Property="Width" Value="Auto">
+                    <Setter Property="MinWidth" Value="100"/>
+                </Trigger>
+                <Trigger Property="Height" Value="Auto">
+                    <Setter Property="MinHeight" Value="20"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
         <Style TargetType="Button">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border x:Name="border"  CornerRadius="10" Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="2">
+                        <Border x:Name="border"  CornerRadius="30" Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="2">
                             <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
 
@@ -27,8 +49,8 @@
                                                     <TranslateTransform X="0.02" Y="0.3"/>
                                                 </TransformGroup>
                                             </RadialGradientBrush.RelativeTransform>
-                                            <GradientStop Color="#00000000" Offset="1"/>
-                                            <GradientStop Color="#FF303030" Offset="0.3"/>
+                                            <GradientStop Color="#00000000" Offset="1.5"/>
+                                            <GradientStop Color="#FFE3B6B6" Offset="0.5"/>
                                         </RadialGradientBrush>
                                     </Setter.Value>
                                 </Setter>
@@ -51,7 +73,9 @@
             <Setter Property="HorizontalAlignment" Value="Center" />
             <Setter Property="FontFamily" Value="Comic Sans MS"/>
         </Style>
-
+        <Style TargetType="TextBox">
+            <Setter Property="TextWrapping" Value="NoWrap"/>
+        </Style>
     </Window.Resources>
     <ScrollViewer VerticalContentAlignment="Center" VerticalScrollBarVisibility="Auto" >
         <Grid Grid.IsSharedSizeScope="True" ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto">
@@ -64,7 +88,7 @@
                 <RowDefinition Height="965*" MinHeight="400"/>
             </Grid.RowDefinitions>
             <Border x:Name="WindowLabel" Background="#FFFFCCE6" MinHeight="60" Grid.ColumnSpan="2" MaxHeight="80" VerticalAlignment="Top" Height="84" />
-            <DataGrid x:Name="WeatherTable" RowBackground="#FFFFDFDA" Grid.Row="1" Background="#FFE8BAD1" Margin="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsSynchronizedWithCurrentItem="True" FontSize="22" CanUserReorderColumns="False" AutoGenerateColumns="False" ColumnWidth="Auto" AlternatingRowBackground="#FFFFE6F2" RowHeight="40" MinRowHeight="30" CanUserResizeRows="False" EnableRowVirtualization="False">
+            <DataGrid x:Name="WeatherTable" RowBackground="#FFFFDFDA" Grid.Row="1" Background="#FFEBC3C1" Margin="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsSynchronizedWithCurrentItem="True" FontSize="22" CanUserReorderColumns="False" AutoGenerateColumns="False" ColumnWidth="Auto" AlternatingRowBackground="#FFFFE6F2" RowHeight="40" MinRowHeight="30" CanUserResizeRows="False" EnableRowVirtualization="False">
                 <DataGrid.Columns>
 
                     <DataGridTextColumn Header="Місто" Binding="{Binding city}" MinWidth="200" ElementStyle="{StaticResource Center}"/>
@@ -81,6 +105,7 @@
                         <Setter Property="Background" Value="#FFE8BAD1" />
                         <Setter Property="HorizontalContentAlignment" Value="Center"/>
                         <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="Height" Value="40"/>
                         <Style.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter Property="Cursor" Value="Hand"/>
@@ -89,23 +114,23 @@
                     </Style>
                 </DataGrid.Resources>
             </DataGrid>
-            <ScrollViewer x:Name="EditForm" Grid.Row="1" Grid.Column="1"  Visibility="Hidden">
+            <Grid x:Name="EditForm" Grid.Row="1" Grid.Column="1" >
                 <Grid Margin="11,19,20,19.8" HorizontalAlignment="Center">
 
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="137*" MinHeight="60"/>
-                        <RowDefinition Height="429*" MinHeight="80"/>
+                        <RowDefinition Height="11*" MinHeight="60"/>
+                        <RowDefinition Height="70*" MinHeight="80"/>
                     </Grid.RowDefinitions>
 
-                    <Grid Margin="20,5,-0.2,2.8">
-                        <Button x:Name="DeleteButton" MaxWidth="120" Margin="156,-10,161,10" MaxHeight="60" Content="Видалити" FontFamily="Comic Sans MS" Click="DeleteButton_Click"/>
-                        <Button x:Name="EditButton" MaxWidth="120" Margin="0,-10,343,10" MaxHeight="60" FontFamily="Comic Sans MS" Content="Редагувати" Click="EditButton_Click"/>
-                        <Button x:Name="AddButton" MaxWidth="120" Margin="321,-10,6,10" MaxHeight="60" FontFamily="Comic Sans MS" Content="Додати" Click="AddButton_Click" ClickMode="Press"/>
+                    <Grid Margin="20,5,-0.2,3.8">
+                        <Button x:Name="DeleteButton" MaxWidth="130" Margin="176,0,171,0" MaxHeight="60" Content="Видалити" FontFamily="Comic Sans MS" Click="DeleteButton_Click" Width="130" HorizontalAlignment="Center" MinWidth="130"/>
+                        <Button x:Name="EditButton" MaxWidth="130" Margin="10,0,0,0" MaxHeight="60" FontFamily="Comic Sans MS" Content="Редагувати" Click="EditButton_Click" MinWidth="130" Width="130" HorizontalAlignment="Left"/>
+                        <Button x:Name="AddButton" MaxWidth="130" Margin="0,0,10,0" MaxHeight="60" FontFamily="Comic Sans MS" Content="Додати" Click="AddButton_Click" ClickMode="Press" MinWidth="130" HorizontalAlignment="Right"/>
                     </Grid>
 
-                    <Rectangle Fill="#FFF2C2DA" Margin="10,15.2,8.8,7.6" RadiusY="40" Grid.Row="1" RadiusX="40" Stroke="Black" StrokeThickness="2"/>
-                    <TextBlock HorizontalAlignment="Center" Height="26" Margin="231,40.2,208.8,0" Grid.Row="1" TextWrapping="Wrap" Text="Запис" VerticalAlignment="Top" Width="57" FontSize="20"/>
-                    <Grid HorizontalAlignment="Left" Height="400" Margin="8,65.2,0,-0.4" Grid.Row="1" VerticalAlignment="Top" Width="479">
+                    <Rectangle Fill="#FFF2C2DA" Margin="10,14.2,8.8,25.4" RadiusY="40" Grid.Row="1" RadiusX="40" Stroke="Black" StrokeThickness="2"/>
+                    <TextBlock HorizontalAlignment="Center" Height="26" Margin="231,39.2,208.8,0" Grid.Row="1" TextWrapping="Wrap" Text="Запис" VerticalAlignment="Top" Width="57" FontSize="20"/>
+                    <Grid HorizontalAlignment="Left" Margin="8,64.2,0,25.4" Grid.Row="1" Width="479">
 
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="192"/>
@@ -122,7 +147,7 @@
                             <RowDefinition Height="231*"/>
                         </Grid.RowDefinitions>
 
-                        <Label Content="Місто" HorizontalAlignment="Center" Height="33" Margin="57,20,10,0" VerticalAlignment="Top" Width="125" FontFamily="Comic Sans MS" FontSize="20" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.RowSpan="2"/>
+                        <Label Content="Місто" HorizontalAlignment="Center" Height="33" Margin="57,30.8,10,0" VerticalAlignment="Top" Width="125" FontFamily="Comic Sans MS" FontSize="20" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.RowSpan="2"/>
                         <TextBox x:Name="city_box" Height="34" Margin="51,23,0,28.6" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="1" HorizontalAlignment="Left" Width="190" Grid.RowSpan="2" Grid.Row="1"/>
 
                         <Label Content="День" HorizontalAlignment="Center" Margin="57,17.8,10,29" Width="125" FontFamily="Comic Sans MS" FontSize="20" Grid.Row="2" Grid.RowSpan="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
@@ -154,19 +179,16 @@
                         </ComboBox>
 
                         <Label Content="Тиск" HorizontalAlignment="Center" Height="34" Margin="57,22.2,10,0" VerticalAlignment="Top" Width="125" FontFamily="Comic Sans MS" FontSize="20" Grid.Row="6" RenderTransformOrigin="0.496,-0.593" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-                        <TextBox x:Name="pressure_box" Height="39" Margin="51,23.2,0,117" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="1" HorizontalAlignment="Left" Width="190" Grid.Row="6"/>
-
-                        <Button x:Name="SaveButton" Content="Зберегти" Margin="173,89.2,186.2,28" Grid.Row="6" Grid.ColumnSpan="2" HorizontalAlignment="Center" MinWidth="120" Click="SaveButton_Click" />
+                        <TextBox x:Name="pressure_box" Height="34
+                                 " Margin="51,23.2,0,0" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="1" HorizontalAlignment="Left" Width="190" Grid.Row="6"/>
+                        <Button x:Name="SaveButton" Content="Зберегти" Margin="168,0,161.2,27" Grid.Row="6" HorizontalAlignment="Center" MinWidth="130" Click="SaveButton_Click" Width="150" Height="62" VerticalAlignment="Bottom" Grid.ColumnSpan="2" />
 
                     </Grid>
                 </Grid>
-            </ScrollViewer>
+            </Grid>
 
-            <ScrollViewer x:Name="UserForm">
-                <Button x:Name="LogInButton" Content="Зареєструватися" Grid.Column="1" HorizontalAlignment="Center" Height="110" Margin="0" Grid.Row="1" VerticalAlignment="Center" Width="225" Click="LogInButton_Click"/>
-            </ScrollViewer>
-
-            <ComboBox x:Name="month_y" Height="34" Margin="395,24,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="190" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+            <Label Content="Місяць" HorizontalAlignment="Left" Height="34" Margin="315,23,0,0" VerticalAlignment="Top" Width="100" FontFamily="Comic Sans MS" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" RenderTransformOrigin="0.598,0.641"/>
+            <ComboBox x:Name="month_y" Height="34" Margin="420,24,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="190" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
                 <TextBlock><Run Text="Січень"/></TextBlock>
                 <TextBlock><Run Text="Лютий"/></TextBlock>
                 <TextBlock><Run Text="Березень"/></TextBlock>
@@ -180,10 +202,20 @@
                 <TextBlock><Run Text="Листопад"/></TextBlock>
                 <TextBlock><Run Text="Грудень"/></TextBlock>
             </ComboBox>
-            <TextBox x:Name="city_x" Height="34" Margin="105,24,0,26" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Width="190"/>
-            <Button x:Name="SearchButton" MaxWidth="120" Margin="167.2,15,242,20" MaxHeight="60" FontFamily="Comic Sans MS" Content="Пошук" ClickMode="Press" Grid.Column="1" Click="SearchButton_Click" MinWidth="120"/>
-            <Button x:Name="SearchRainButton" MaxWidth="120" Margin="349.2,15,10,20" MaxHeight="60" FontFamily="Comic Sans MS" Content="Пошук днів з дощем" ClickMode="Press" Grid.Column="1" Width="200" MinWidth="200" Click="SearchRainButton_Click"/>
 
+            <Label Content="Місто" HorizontalAlignment="Left" Height="33" Margin="5,24,0,0" VerticalAlignment="Top" Width="100" FontFamily="Comic Sans MS" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <TextBox x:Name="city_x" Height="34" Margin="105,24,0,26" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Width="190"/>
+
+            <Button x:Name="SearchButton" MaxWidth="120" Margin="167.2,15,242,20" MaxHeight="60" FontFamily="Comic Sans MS" Content="Пошук" ClickMode="Press" Grid.Column="1" Click="SearchButton_Click" MinWidth="120" HorizontalAlignment="Right"/>
+            <Button x:Name="SearchRainButton" MaxWidth="120" Margin="349.2,15,10,20" MaxHeight="60" FontFamily="Comic Sans MS" Content="Пошук днів з дощем" ClickMode="Press" Grid.Column="1" MinWidth="200" Click="SearchRainButton_Click" HorizontalAlignment="Right"/>
+
+            <Grid x:Name="UserForm" Visibility="Hidden" Grid.Row="1" Grid.Column="1" Margin="0.2,20,10,-0.2">
+                <Button x:Name="LogInButton" Content="ВХІД" HorizontalAlignment="Center" Height="55" Margin="162,421,162,109" VerticalAlignment="Center" Width="225" Click="LogInButton_Click" Background="#FFF2C2DA" FontSize="20" FontWeight="Bold"/>
+                <Button x:Name="ReportButton" Content="Створити звіт" HorizontalAlignment="Center" Height="55" Margin="162,481,162,49" VerticalAlignment="Center" Width="225" Click="ReportButton_Click" Background="#FFF2C2DA" FontSize="20" FontWeight="Bold"/>
+                <TextBox Text="УВІЙДІТЬ ДЛЯ ДОСТУПУ ДО ВСІХ ФУНКЦІЙ" Template="{StaticResource Rounded}" FontSize="18" TextWrapping="Wrap" TextAlignment="Center" HorizontalAlignment="Center" Width="380" Background="#FFB9A5CF" VerticalContentAlignment="Center" Height="60" VerticalAlignment="Top" Margin="83,356,86,0"/>
+                <Image Panel.ZIndex="50" HorizontalAlignment="Center" Height="316" Margin="83,20,91,0" VerticalAlignment="Top" Width="375" Source="image.png"/>
+
+            </Grid>
         </Grid>
     </ScrollViewer>
 

@@ -32,7 +32,7 @@ namespace cloudy
 
         private void Enter_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow.authorization.loged_in = MainWindow.authorization.CheckLogIn(login.Text.Trim(), password.Text.Trim());
+            MainWindow.authorization.loged_in = MainWindow.authorization.CheckLogIn(login.Text.Trim(), password.Password.Trim());
             if (MainWindow.authorization.loged_in)
             {
                 this.Close();
@@ -40,11 +40,7 @@ namespace cloudy
             else
             {
                 MessageBox.Show("Неправильний логін або пароль", "Помилка!");
-                login.Select(0, login.Text.Length);
-                password.Select(0, password.Text.Length);
             }
         }
-
-      
     }
 }

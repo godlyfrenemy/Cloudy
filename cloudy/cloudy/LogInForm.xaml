@@ -27,8 +27,8 @@
                                                     <TranslateTransform X="0.02" Y="0.3"/>
                                                 </TransformGroup>
                                             </RadialGradientBrush.RelativeTransform>
-                                            <GradientStop Color="#00000000" Offset="1"/>
-                                            <GradientStop Color="#FF303030" Offset="0.3"/>
+                                            <GradientStop Color="#00000000" Offset="1.5"/>
+                                            <GradientStop Color="#FFE3B6B6" Offset="0.5"/>
                                         </RadialGradientBrush>
                                     </Setter.Value>
                                 </Setter>
@@ -57,7 +57,7 @@
         <TextBlock FontFamily="Comic Sans MS" FontSize="20" Margin="60,126,282,221" HorizontalAlignment="Center" Width="100" VerticalAlignment="Center" Height="30" Text=" ЛОГІН"/>
         <TextBox x:Name="login" Width="215" Height="39" Margin="174,122,53,216" HorizontalAlignment="Center" BorderBrush="Black" VerticalAlignment="Center" AcceptsReturn="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
         <!--Пароль-->
-        <TextBox  x:Name="password" Width="215" Height="40" Margin="174,175,53,162" HorizontalAlignment="Center" BorderBrush="Black" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <PasswordBox  x:Name="password" Width="215" Height="40" Margin="174,175,53,162" HorizontalAlignment="Center" BorderBrush="Black" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         <TextBlock FontFamily="Comic Sans MS" FontSize="20" Margin="51,180,282,167" HorizontalAlignment="Center" Width="109" VerticalAlignment="Center" Height="30" Text=" ПАРОЛЬ "/>
 
         <Button  x:Name="Enter" Content="ВХІД" FontFamily="Comic Sans MS" FontSize="15" Margin="70,253,252,72" RenderTransformOrigin="0.485,1.347" Background="#FFFF9999" Click="Enter_Click" IsDefault="True"/>
