@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-
+using System.Globalization;
 
 namespace cloudy
 {
@@ -86,9 +86,15 @@ namespace cloudy
             }
             for (int i = 0; i < rainData.Count; i++)
             {
+                string month = rainData[i].month;
+
+                month = month.Replace("ень", "ня");
+                month = month.Replace("пад", "пада");
+                month = month.Replace("ий", "ого");
+
                 wordDoc.Tables[2].Rows.Add();
                 wordDoc.Tables[2].Cell(2 + i, 1).Range.Text = Convert.ToString(i + 1);
-                wordDoc.Tables[2].Cell(2 + i, 2).Range.Text = Convert.ToString(rainData[i].day) + " " + rainData[i].month;
+                wordDoc.Tables[2].Cell(2 + i, 2).Range.Text = rainData[i].day + " " + month;
             }
 
             wordDoc.Tables[1].Cell(1, 2).Range.Text = Convert.ToString(rainData.Count);
@@ -120,25 +126,6 @@ namespace cloudy
                 result += weathers[i].pressure;
             }
             return result / weathers.Count;
-        }
-
-        ~SelectData()
-        {
-            try
-            {
-                if (wordDoc != null)
-                {
-                    wordDoc.Close(Microsoft.Office.Interop.Word.WdSaveOptions.wdPromptToSaveChanges);
-                }
-                if (wordApp != null)
-                {
-                    wordApp.Quit(Microsoft.Office.Interop.Word.WdSaveOptions.wdPromptToSaveChanges);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Помилка!", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
         }
     }
 }

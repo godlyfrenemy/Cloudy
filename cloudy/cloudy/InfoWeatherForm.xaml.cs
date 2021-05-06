@@ -45,6 +45,11 @@ namespace cloudy
         {
             this.Show();
             LoadBase();
+
+            for(int i = 1; i <= 31; i++)
+            {
+                day_box.Items.Add(Convert.ToString(i));
+            }
         }
 
         private void DisplayList(List<Weather> list)
@@ -73,6 +78,10 @@ namespace cloudy
                     foreach (Weather element in result)
                     {
                         AddToList(element);
+                        if (!city_x.Items.Contains(element.city))
+                        {
+                            city_x.Items.Add(element.city);
+                        }
                     }
                 }
                 WeatherTable.SelectedItem = null;
@@ -96,6 +105,7 @@ namespace cloudy
         {
             weathers = new List<Weather> { };
             WeatherTable.Items.Clear();
+            city_x.Items.Clear();
         }
 
         private void ClearBoxes()
@@ -106,6 +116,13 @@ namespace cloudy
             precip_box.Text = String.Empty;
             pressure_box.Text = String.Empty;
             temp_box.Text = String.Empty;
+        }
+
+        private bool UserInputOk()
+        {
+            return !String.IsNullOrWhiteSpace(city_box.Text) && !String.IsNullOrWhiteSpace(day_box.Text) &&
+                !String.IsNullOrWhiteSpace(month_box.Text) && !String.IsNullOrWhiteSpace(temp_box.Text) &&
+                !String.IsNullOrWhiteSpace(precip_box.Text) && !String.IsNullOrWhiteSpace(pressure_box.Text);
         }
 
         private bool AddToList(Weather weather)
@@ -153,6 +170,7 @@ namespace cloudy
                 {
                     throw new Exception("Увімкнутий режим редагування");
                 }
+
                 Weather weather = new Weather(city_box.Text, Convert.ToInt16(day_box.Text), month_box.Text, Convert.ToInt16(temp_box.Text), precip_box.Text, Convert.ToUInt32(pressure_box.Text));
 
                 int result = dataAccess.AddToBase(weather);
@@ -181,11 +199,21 @@ namespace cloudy
         {
             try
             {
+                if (!UserInputOk())
+                {
+                    throw new Exception("Неправильні вхідні дані");
+                }
                 if (buttonPressed == (string)EditButton.Content)
                 {
-                    buttonPressed = String.Empty;
-                    DeleteFromList(selectedWeather); 
-                    AddButton_Click(sender, e);
+                    if(DeleteFromList(selectedWeather))
+                    {
+                        buttonPressed = String.Empty;
+                        AddButton_Click(sender, e);
+                    }
+                    else
+                    {
+                        throw new Exception("Не вдалось відредагувати запис");
+                    }
                 }
                 else
                 {
@@ -194,9 +222,9 @@ namespace cloudy
                 ClearBoxes();
                 WeatherTable.SelectedItem = null;
             }
-            catch
+            catch (Exception ex)
             {
-                MessageBox.Show("Не вдалось зберегти запис", "Помилка!", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show(ex.Message, "Помилка!", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
@@ -314,9 +342,9 @@ namespace cloudy
         {
             try
             {
-                if (selectedCity == String.Empty || selectedMonth == String.Empty)
+                if (selectXYList == null)
                 {
-                    throw new Exception("Здійсніть спочатку пошук записів за містом та місяцем");
+                    throw new Exception("Здійсніть спочатку пошук записів за містом та місяцем, або оберіть потрібні місто та місяць");
                 }
                 if (rainDataList == null)
                 {

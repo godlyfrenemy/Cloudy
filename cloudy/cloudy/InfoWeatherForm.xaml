@@ -130,7 +130,7 @@
 
                     <Rectangle Fill="#FFF2C2DA" Margin="10,14.2,8.8,25.4" RadiusY="40" Grid.Row="1" RadiusX="40" Stroke="Black" StrokeThickness="2"/>
                     <TextBlock HorizontalAlignment="Center" Height="26" Margin="231,39.2,208.8,0" Grid.Row="1" TextWrapping="Wrap" Text="Запис" VerticalAlignment="Top" Width="57" FontSize="20"/>
-                    <Grid HorizontalAlignment="Left" Margin="8,64.2,0,25.4" Grid.Row="1" Width="479">
+                    <Grid HorizontalAlignment="Left" Margin="10,45.2,0,25.4" Grid.Row="1" Width="479">
 
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="192"/>
@@ -138,23 +138,24 @@
                         </Grid.ColumnDefinitions>
 
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="10*"/>
-                            <RowDefinition Height="55*"/>
-                            <RowDefinition Height="55*"/>
-                            <RowDefinition Height="55*"/>
-                            <RowDefinition Height="55*"/>
-                            <RowDefinition Height="55*"/>
-                            <RowDefinition Height="231*"/>
+                            <RowDefinition Height="6*"/>
+                            <RowDefinition Height="37*"/>
+                            <RowDefinition Height="46*"/>
+                            <RowDefinition Height="46*"/>
+                            <RowDefinition Height="46*"/>
+                            <RowDefinition Height="46*"/>
+                            <RowDefinition Height="46*"/>
+                            <RowDefinition Height="124*"/>
                         </Grid.RowDefinitions>
 
-                        <Label Content="Місто" HorizontalAlignment="Center" Height="33" Margin="57,30.8,10,0" VerticalAlignment="Top" Width="125" FontFamily="Comic Sans MS" FontSize="20" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.RowSpan="2"/>
-                        <TextBox x:Name="city_box" Height="34" Margin="51,23,0,28.6" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="1" HorizontalAlignment="Left" Width="190" Grid.RowSpan="2" Grid.Row="1"/>
+                        <Label Content="Місто" HorizontalAlignment="Center" Margin="57,6.4,10,8.4" Width="125" FontFamily="Comic Sans MS" FontSize="20" Grid.Row="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="34"/>
+                        <TextBox x:Name="city_box" Height="34" Margin="51,0,0,7.4" TextWrapping="NoWrap" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="1" HorizontalAlignment="Left" Width="190" Grid.Row="2"/>
 
-                        <Label Content="День" HorizontalAlignment="Center" Margin="57,17.8,10,29" Width="125" FontFamily="Comic Sans MS" FontSize="20" Grid.Row="2" Grid.RowSpan="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-                        <TextBox x:Name="day_box" Height="34" Margin="51,20.8,0,30" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="1" HorizontalAlignment="Left" Width="190" Grid.Row="2" Grid.RowSpan="2"/>
+                        <Label Content="День" HorizontalAlignment="Center" Margin="57,9.6,10,0" Width="125" FontFamily="Comic Sans MS" FontSize="20" Grid.Row="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="34" VerticalAlignment="Top"/>
+                        <ComboBox x:Name="day_box" Height="34" Margin="51,9.6,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="1" HorizontalAlignment="Left" Width="190" Grid.Row="3"/>
 
-                        <Label Content="Місяць" HorizontalAlignment="Center" Height="34" Margin="57,21.4,10,0" VerticalAlignment="Top" Width="125" FontFamily="Comic Sans MS" FontSize="20" Grid.Row="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.RowSpan="2"/>
-                        <ComboBox x:Name="month_box" Height="34" Margin="51,21.4,0,0" HorizontalAlignment="Left" Grid.Row="3" VerticalAlignment="Top" Width="190" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Grid.Column="1" Grid.RowSpan="2" BorderBrush="Black">
+                        <Label Content="Місяць" HorizontalAlignment="Center" Height="34" Margin="57,5.6,10,0" VerticalAlignment="Top" Width="125" FontFamily="Comic Sans MS" FontSize="20" Grid.Row="4" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                        <ComboBox x:Name="month_box" Height="34" Margin="51,8.6,0,0" HorizontalAlignment="Left" Grid.Row="4" VerticalAlignment="Top" Width="190" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Grid.Column="1" BorderBrush="Black">
                             <TextBlock><Run Text="Січень"/></TextBlock>
                             <TextBlock><Run Text="Лютий"/></TextBlock>
                             <TextBlock><Run Text="Березень"/></TextBlock>
@@ -169,19 +170,18 @@
                             <TextBlock><Run Text="Грудень"/></TextBlock>
                         </ComboBox>
 
-                        <Label Content="Температура" HorizontalAlignment="Center" Height="37" Margin="57,21,0,0" VerticalAlignment="Top" Width="135" FontFamily="Comic Sans MS" FontSize="20" Grid.Row="4" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.RowSpan="2"/>
-                        <TextBox x:Name="temp_box" Height="34" Margin="51,21,0,0" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="1" HorizontalAlignment="Left" Width="190" Grid.Row="4" Grid.RowSpan="2"/>
+                        <Label Content="Температура" HorizontalAlignment="Center" Height="37" Margin="57,4.8,0,0" VerticalAlignment="Top" Width="135" FontFamily="Comic Sans MS" FontSize="20" Grid.Row="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                        <TextBox x:Name="temp_box" Height="34" Margin="51,7.8,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="1" HorizontalAlignment="Left" Width="190" Grid.Row="5"/>
 
-                        <Label Content="Опади" HorizontalAlignment="Center" Height="34" Margin="57,20.6,10,0" VerticalAlignment="Top" Width="125" FontFamily="Comic Sans MS" FontSize="20" Grid.Row="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.RowSpan="2"/>
-                        <ComboBox x:Name="precip_box" Grid.Column="1" HorizontalAlignment="Left" Height="35" Margin="51,20.6,0,0" Grid.Row="5" VerticalAlignment="Top" Width="190" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Grid.RowSpan="2" BorderBrush="Black">
+                        <Label Content="Опади" HorizontalAlignment="Center" Height="34" Margin="57,6,10,0" VerticalAlignment="Top" Width="125" FontFamily="Comic Sans MS" FontSize="20" Grid.Row="6" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                        <ComboBox x:Name="precip_box" Grid.Column="1" HorizontalAlignment="Left" Height="35" Margin="51,8,0,0" Grid.Row="6" VerticalAlignment="Top" Width="190" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="Black">
                             <TextBlock><Run Text="Є"/></TextBlock>
                             <TextBlock><Run Text="Нема"/></TextBlock>
                         </ComboBox>
 
-                        <Label Content="Тиск" HorizontalAlignment="Center" Height="34" Margin="57,22.2,10,0" VerticalAlignment="Top" Width="125" FontFamily="Comic Sans MS" FontSize="20" Grid.Row="6" RenderTransformOrigin="0.496,-0.593" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-                        <TextBox x:Name="pressure_box" Height="34
-                                 " Margin="51,23.2,0,0" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="1" HorizontalAlignment="Left" Width="190" Grid.Row="6"/>
-                        <Button x:Name="SaveButton" Content="Зберегти" Margin="168,0,161.2,27" Grid.Row="6" HorizontalAlignment="Center" MinWidth="130" Click="SaveButton_Click" Width="150" Height="62" VerticalAlignment="Bottom" Grid.ColumnSpan="2" />
+                        <Label Content="Тиск" HorizontalAlignment="Center" Height="34" Margin="57,6.2,10,0" VerticalAlignment="Top" Width="125" FontFamily="Comic Sans MS" FontSize="20" Grid.Row="7" RenderTransformOrigin="0.496,-0.593" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                        <TextBox x:Name="pressure_box" Height="34" Margin="51,8.2,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="1" HorizontalAlignment="Left" Width="190" Grid.Row="7"/>
+                        <Button x:Name="SaveButton" Content="Зберегти" Margin="161,0,168.2,14.2" Grid.Row="7" HorizontalAlignment="Center" MinWidth="130" Click="SaveButton_Click" Width="150" Height="62" VerticalAlignment="Bottom" Grid.ColumnSpan="2" />
 
                     </Grid>
                 </Grid>
@@ -204,7 +204,7 @@
             </ComboBox>
 
             <Label Content="Місто" HorizontalAlignment="Left" Height="33" Margin="5,24,0,0" VerticalAlignment="Top" Width="100" FontFamily="Comic Sans MS" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-            <TextBox x:Name="city_x" Height="34" Margin="105,24,0,26" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Width="190"/>
+            <ComboBox x:Name="city_x" Height="34" Margin="105,24,0,26" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Width="190"/>
 
             <Button x:Name="SearchButton" MaxWidth="120" Margin="167.2,15,242,20" MaxHeight="60" FontFamily="Comic Sans MS" Content="Пошук" ClickMode="Press" Grid.Column="1" Click="SearchButton_Click" MinWidth="120" HorizontalAlignment="Right"/>
             <Button x:Name="SearchRainButton" MaxWidth="120" Margin="349.2,15,10,20" MaxHeight="60" FontFamily="Comic Sans MS" Content="Пошук днів з дощем" ClickMode="Press" Grid.Column="1" MinWidth="200" Click="SearchRainButton_Click" HorizontalAlignment="Right"/>
