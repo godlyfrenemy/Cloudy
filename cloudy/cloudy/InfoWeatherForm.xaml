@@ -216,7 +216,7 @@
                 <Image Panel.ZIndex="50" HorizontalAlignment="Center" Height="316" Margin="83,20,91,0" VerticalAlignment="Top" Width="375" Source="image.png"/>
 
             </Grid>
-            <Button x:Name="RefreshButton" MaxWidth="120" Margin="0,15,387,20" MaxHeight="60" FontFamily="Comic Sans MS" Content="Завантажити" ClickMode="Press" Grid.Column="1" Click="RefreshButton_Click" MinWidth="140" HorizontalAlignment="Right" Width="140"/>
+            <Button x:Name="RefreshButton" MaxWidth="120" Margin="0,15,409,20" MaxHeight="60" FontFamily="Comic Sans MS" Content="Завантажити" ClickMode="Press" Grid.Column="1" Click="RefreshButton_Click" MinWidth="140" HorizontalAlignment="Right" Width="140"/>
         </Grid>
     </ScrollViewer>
 

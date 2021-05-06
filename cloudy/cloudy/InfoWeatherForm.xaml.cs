@@ -296,7 +296,10 @@ namespace cloudy
             {
                 selectedCity = city_x.Text;
                 selectedMonth = month_y.Text;
-
+                if(String.IsNullOrEmpty(selectedCity) || String.IsNullOrEmpty(selectedMonth))
+                {
+                    throw new Exception("Неправильні вхідні дані");
+                }
                 selectXYList = dataAccess.SelectXY(selectedCity, selectedMonth);
                 if(selectXYList == null)
                 {
