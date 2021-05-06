@@ -68,6 +68,8 @@ namespace cloudy
             {
                 List<Weather> result = dataAccess.GetWeathers();
                 ClearList();
+                city_x.Items.Clear();
+                month_y.Items.Clear();
 
                 if (result == null)
                 {
@@ -81,6 +83,10 @@ namespace cloudy
                         if (!city_x.Items.Contains(element.city))
                         {
                             city_x.Items.Add(element.city);
+                        }
+                        if(!month_y.Items.Contains(element.month))
+                        {
+                            month_y.Items.Add(element.month);
                         }
                     }
                 }
@@ -105,7 +111,6 @@ namespace cloudy
         {
             weathers = new List<Weather> { };
             WeatherTable.Items.Clear();
-            city_x.Items.Clear();
         }
 
         private void ClearBoxes()
@@ -296,6 +301,7 @@ namespace cloudy
             {
                 selectedCity = city_x.Text;
                 selectedMonth = month_y.Text;
+
                 if(String.IsNullOrEmpty(selectedCity) || String.IsNullOrEmpty(selectedMonth))
                 {
                     throw new Exception("Неправильні вхідні дані");

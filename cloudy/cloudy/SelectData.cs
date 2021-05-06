@@ -82,6 +82,7 @@ namespace cloudy
         {
             if (rainData == null)
             {
+                wordDoc.Tables[1].Cell(1, 2).Range.Text = Convert.ToString(0);
                 return;
             }
             for (int i = 0; i < rainData.Count; i++)
