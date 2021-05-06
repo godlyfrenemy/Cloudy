@@ -357,5 +357,10 @@ namespace cloudy
                 MessageBox.Show(ex.Message, "Помилка!", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
+
+        private void RefreshButton_Click(object sender, RoutedEventArgs e)
+        {
+            LoadBase();
+        }
     }
 }
