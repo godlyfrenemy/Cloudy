@@ -33,6 +33,7 @@ namespace cloudy
 
         private string buttonPressed;
 
+        public static List<string> cityList = new List<string>();
         public static string selectedCity = String.Empty;
         public static string selectedMonth = String.Empty;
 
@@ -41,64 +42,9 @@ namespace cloudy
             InitializeComponent();
         }
 
-        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        public static void ErrorShow(string Message, string Header)
         {
-            this.Show();
-            LoadBase();
-
-            for(int i = 1; i <= 31; i++)
-            {
-                day_box.Items.Add(Convert.ToString(i));
-            }
-        }
-
-        private void DisplayList(List<Weather> list)
-        {
-            WeatherTable.Items.Clear();
-
-            foreach(Weather element in list)
-            {
-                WeatherTable.Items.Add(element);
-            }
-        }
-
-        private bool LoadBase()
-        {
-            try
-            {
-                List<Weather> result = dataAccess.GetWeathers();
-                ClearList();
-                city_x.Items.Clear();
-                month_y.Items.Clear();
-
-                if (result == null)
-                {
-                    MessageBox.Show("База даних порожня", "Увага!", MessageBoxButton.OK, MessageBoxImage.Warning);
-                }
-                else
-                {
-                    foreach (Weather element in result)
-                    {
-                        AddToList(element);
-                        if (!city_x.Items.Contains(element.city))
-                        {
-                            city_x.Items.Add(element.city);
-                        }
-                        if(!month_y.Items.Contains(element.month))
-                        {
-                            month_y.Items.Add(element.month);
-                        }
-                    }
-                }
-                WeatherTable.SelectedItem = null;
-
-                return true;
-            }
-            catch
-            {
-                MessageBox.Show("Не вдалось прочитати базу даних", "Помилка!", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return false;
-            }
+            MessageBox.Show(Message, Header, MessageBoxButton.OK, MessageBoxImage.Warning);
         }
 
         public void ToggleDisplay()
@@ -130,6 +76,68 @@ namespace cloudy
                 !String.IsNullOrWhiteSpace(precip_box.Text) && !String.IsNullOrWhiteSpace(pressure_box.Text);
         }
 
+        public void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.Show();
+            LoadBase();
+
+            for(int i = 1; i <= 31; i++)
+            {
+                day_box.Items.Add(Convert.ToString(i));
+            }
+        }
+
+        private void DisplayList(List<Weather> list)
+        {
+            WeatherTable.Items.Clear();
+
+            foreach(Weather element in list)
+            {
+                WeatherTable.Items.Add(element);
+            }
+        }
+
+        public bool LoadBase()
+        {
+            try
+            {
+                List<Weather> result = dataAccess.GetWeathers();
+                ClearList();
+                city_x.Items.Clear();
+                month_y.Items.Clear();
+                cityList.Clear();
+
+                if (result == null)
+                {
+                    ErrorShow("База даних порожня", "Увага!");
+                }
+                else
+                {
+                    foreach (Weather element in result)
+                    {
+                        AddToList(element);
+                        if (!city_x.Items.Contains(element.city))
+                        {
+                            city_x.Items.Add(element.city);
+                            cityList.Add(element.city);
+                        }
+                        if(!month_y.Items.Contains(element.month))
+                        {
+                            month_y.Items.Add(element.month);
+                        }
+                    }
+                }
+                WeatherTable.SelectedItem = null;
+
+                return true;
+            }
+            catch
+            {
+                ErrorShow("Не вдалось прочитати базу даних", "Помилка!");
+                return false;
+            }
+        }
+
         private bool AddToList(Weather weather)
         {
             try
@@ -141,7 +149,7 @@ namespace cloudy
             }
             catch
             {
-                MessageBox.Show("Не вдалось додати запис", "Помилка!", MessageBoxButton.OK, MessageBoxImage.Warning);
+                ErrorShow("Не вдалось додати запис", "Помилка!");
                 return false;
             }
         }
@@ -156,13 +164,13 @@ namespace cloudy
                 }
                 else
                 {
-                    MessageBox.Show("Не вдалось видалити запис з бази даних", "Помилка!", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    ErrorShow("Не вдалось видалити запис з бази даних", "Помилка!");
                     return false;
                 }
             }
             catch
             {
-                MessageBox.Show("Не вдалось видалити запис", "Помилка!", MessageBoxButton.OK, MessageBoxImage.Warning);
+                ErrorShow("Не вдалось видалити запис", "Помилка!");
                 return false;
             }
         }
@@ -195,9 +203,9 @@ namespace cloudy
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.Message, "Помилка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                ErrorShow(ex.Message, "Помилка");
             }
-               
+
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
@@ -229,7 +237,7 @@ namespace cloudy
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Помилка!", MessageBoxButton.OK, MessageBoxImage.Warning);
+                ErrorShow(ex.Message, "Помилка");
             }
         }
 
@@ -267,7 +275,7 @@ namespace cloudy
             }
             catch
             {
-                MessageBox.Show("Ви не обрали запис", "Помилка!", MessageBoxButton.OK, MessageBoxImage.Warning);
+                ErrorShow("Ви не обрали запис", "Помилка!");
             }
 
         }
@@ -290,12 +298,12 @@ namespace cloudy
             }
             catch
             {
-                MessageBox.Show("Ви не обрали запис", "Помилка!", MessageBoxButton.OK, MessageBoxImage.Warning);
+                ErrorShow("Ви не обрали запис", "Помилка!");
             }
 
         }
 
-        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        public void SearchButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -322,7 +330,7 @@ namespace cloudy
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.Message, "Помилка!", MessageBoxButton.OK, MessageBoxImage.Warning);
+                ErrorShow(ex.Message, "Помилка");
             }
         }
 
@@ -343,7 +351,7 @@ namespace cloudy
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Помилка!", MessageBoxButton.OK, MessageBoxImage.Warning);
+                ErrorShow(ex.Message, "Помилка");
             }
         }
 
@@ -363,7 +371,7 @@ namespace cloudy
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Помилка!", MessageBoxButton.OK, MessageBoxImage.Warning);
+                ErrorShow(ex.Message, "Помилка");
             }
         }
 

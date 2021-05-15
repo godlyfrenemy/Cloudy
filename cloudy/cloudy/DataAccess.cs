@@ -10,7 +10,7 @@ using System.Windows;
 
 namespace cloudy
 {
-    class DataAccess
+    public class DataAccess
     {
         MySqlConnection conn;
         MySqlCommand command;

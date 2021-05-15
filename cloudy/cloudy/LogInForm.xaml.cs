@@ -39,7 +39,7 @@ namespace cloudy
             }
             else
             {
-                MessageBox.Show("Неправильний логін або пароль", "Помилка!");
+                MainWindow.ErrorShow("Неправильний логін або пароль", "Помилка!");
             }
         }
     }

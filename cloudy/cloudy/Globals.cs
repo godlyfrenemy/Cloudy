@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace cloudy
 {
-    class Weather
+    public class Weather
     {
         public string city { get; set; }
         public short day { get; set; }

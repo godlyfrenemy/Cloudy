@@ -26,9 +26,9 @@ namespace cloudy
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message + char.ConvertFromUtf32(13) +
+                MainWindow.ErrorShow(ex.Message + char.ConvertFromUtf32(13) +
                     "Помістіть файл Шаблон_Пошуку.dotx" + char.ConvertFromUtf32(13) +
-                    "у каталог із ехе-файлом програми і повторіть збереження", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    "у каталог із ехе-файлом програми і повторіть збереження", "Помилка");
             }
 
             try
@@ -44,8 +44,9 @@ namespace cloudy
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message + char.ConvertFromUtf32(13) +
-                    "Помилка збереження відібраних даних", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MainWindow.ErrorShow(ex.Message + char.ConvertFromUtf32(13) +
+                    "Помилка збереження відібраних даних", "Помилка");
+
             }
         }
 
