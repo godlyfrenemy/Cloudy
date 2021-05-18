@@ -31,8 +31,6 @@ namespace cloudy
         private Weather selectedWeather { get; set; }
         private DataAccess dataAccess = new DataAccess();
 
-        private string buttonPressed;
-
         public static List<string> cityList = new List<string>();
         public static string selectedCity = String.Empty;
         public static string selectedMonth = String.Empty;
@@ -73,7 +71,9 @@ namespace cloudy
         {
             return !String.IsNullOrWhiteSpace(city_box.Text) && !String.IsNullOrWhiteSpace(day_box.Text) &&
                 !String.IsNullOrWhiteSpace(month_box.Text) && !String.IsNullOrWhiteSpace(temp_box.Text) &&
-                !String.IsNullOrWhiteSpace(precip_box.Text) && !String.IsNullOrWhiteSpace(pressure_box.Text);
+                !String.IsNullOrWhiteSpace(precip_box.Text) && !String.IsNullOrWhiteSpace(pressure_box.Text) &&
+                Convert.ToInt32(pressure_box.Text) > 650 && Convert.ToInt32(pressure_box.Text) < 800 &&
+                Convert.ToInt32(temp_box.Text) > -60 && Convert.ToInt32(temp_box.Text) < 50;
         }
 
         public void MainWindow_Loaded(object sender, RoutedEventArgs e)
@@ -81,7 +81,7 @@ namespace cloudy
             this.Show();
             LoadBase();
 
-            for(int i = 1; i <= 31; i++)
+            for (int i = 1; i <= 31; i++)
             {
                 day_box.Items.Add(Convert.ToString(i));
             }
@@ -103,8 +103,8 @@ namespace cloudy
             {
                 List<Weather> result = dataAccess.GetWeathers();
                 ClearList();
+                ClearBoxes();
                 city_x.Items.Clear();
-                month_y.Items.Clear();
                 cityList.Clear();
 
                 if (result == null)
@@ -120,10 +120,6 @@ namespace cloudy
                         {
                             city_x.Items.Add(element.city);
                             cityList.Add(element.city);
-                        }
-                        if(!month_y.Items.Contains(element.month))
-                        {
-                            month_y.Items.Add(element.month);
                         }
                     }
                 }
@@ -175,15 +171,10 @@ namespace cloudy
             }
         }
 
-        private void AddButton_Click(object sender, RoutedEventArgs e)
+        private void AddWeather(object sender, RoutedEventArgs e)
         {
             try
             {
-                if(buttonPressed == (string)EditButton.Content)
-                {
-                    throw new Exception("Увімкнутий режим редагування");
-                }
-
                 Weather weather = new Weather(city_box.Text, Convert.ToInt16(day_box.Text), month_box.Text, Convert.ToInt16(temp_box.Text), precip_box.Text, Convert.ToUInt32(pressure_box.Text));
 
                 int result = dataAccess.AddToBase(weather);
@@ -216,21 +207,20 @@ namespace cloudy
                 {
                     throw new Exception("Неправильні вхідні дані");
                 }
-                if (buttonPressed == (string)EditButton.Content)
+                if(WeatherTable.SelectedItem == null)
+                {
+                    AddWeather(sender, e);
+                }
+                else
                 {
                     if(DeleteFromList(selectedWeather))
                     {
-                        buttonPressed = String.Empty;
-                        AddButton_Click(sender, e);
+                        AddWeather(sender, e);
                     }
                     else
                     {
                         throw new Exception("Не вдалось відредагувати запис");
                     }
-                }
-                else
-                {
-                    AddButton_Click(sender, e);
                 }
                 ClearBoxes();
                 WeatherTable.SelectedItem = null;
@@ -250,34 +240,6 @@ namespace cloudy
             {
                 ToggleDisplay();
             }
-        }
-
-        private void EditButton_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                buttonPressed = (string)EditButton.Content;
-
-                selectedWeather = (Weather)WeatherTable.SelectedItem;
-
-                if(selectedWeather == null)
-                {
-                    throw new Exception();
-                }
-
-                city_box.Text = selectedWeather.city.Trim();
-                day_box.Text = Convert.ToString(selectedWeather.day).Trim();
-                month_box.Text = selectedWeather.month;
-                temp_box.Text = Convert.ToString(selectedWeather.temperature).Trim();
-                precip_box.Text = selectedWeather.precipitation.Trim();
-                pressure_box.Text = Convert.ToString(selectedWeather.pressure).Trim();
-
-            }
-            catch
-            {
-                ErrorShow("Ви не обрали запис", "Помилка!");
-            }
-
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
@@ -368,6 +330,7 @@ namespace cloudy
                     rainDataList = dataAccess.GetRainData();
                 }
                 selectData.WriteData(selectXYList, rainDataList);
+                MessageBox.Show("Інформація була успішно записана");
             }
             catch (Exception ex)
             {
@@ -377,7 +340,38 @@ namespace cloudy
 
         private void RefreshButton_Click(object sender, RoutedEventArgs e)
         {
-            LoadBase();
+            LoadBase();      
+        }
+
+        private void WeatherTable_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                selectedWeather = (Weather)WeatherTable.SelectedItem;
+
+                if (selectedWeather == null)
+                {
+                    ClearBoxes();
+                    return;
+                }
+
+                city_box.Text = selectedWeather.city.Trim();
+                day_box.Text = Convert.ToString(selectedWeather.day).Trim();
+                month_box.Text = selectedWeather.month;
+                temp_box.Text = Convert.ToString(selectedWeather.temperature).Trim();
+                precip_box.Text = selectedWeather.precipitation.Trim();
+                pressure_box.Text = Convert.ToString(selectedWeather.pressure).Trim();
+            }
+            catch
+            {
+                ErrorShow("Ви не обрали запис", "Помилка!");
+            }
+        }
+
+        private void ChartButton_Click(object sender, RoutedEventArgs e)
+        {
+            Chart chart = new Chart(weathers);
+            chart.Show();
         }
     }
 }
