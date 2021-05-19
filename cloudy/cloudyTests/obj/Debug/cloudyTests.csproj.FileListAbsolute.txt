@@ -22,3 +22,9 @@ C:\Users\lenovo\Documents\GitHub\Cloudy\cloudy\cloudyTests\obj\Debug\cloudyTests
 C:\Users\lenovo\Documents\GitHub\Cloudy\cloudy\cloudyTests\obj\Debug\cloudyTests.csproj.CopyComplete
 C:\Users\lenovo\Documents\GitHub\Cloudy\cloudy\cloudyTests\obj\Debug\cloudyTests.dll
 C:\Users\lenovo\Documents\GitHub\Cloudy\cloudy\cloudyTests\obj\Debug\cloudyTests.pdb
+C:\Users\lenovo\Documents\GitHub\Cloudy\cloudy\cloudyTests\bin\Debug\LiveCharts.dll
+C:\Users\lenovo\Documents\GitHub\Cloudy\cloudy\cloudyTests\bin\Debug\LiveCharts.Wpf.dll
+C:\Users\lenovo\Documents\GitHub\Cloudy\cloudy\cloudyTests\bin\Debug\LiveCharts.pdb
+C:\Users\lenovo\Documents\GitHub\Cloudy\cloudy\cloudyTests\bin\Debug\LiveCharts.xml
+C:\Users\lenovo\Documents\GitHub\Cloudy\cloudy\cloudyTests\bin\Debug\LiveCharts.Wpf.pdb
+C:\Users\lenovo\Documents\GitHub\Cloudy\cloudy\cloudyTests\bin\Debug\LiveCharts.Wpf.xml

@@ -18,7 +18,8 @@ namespace cloudy.Tests
             List<Weather> expected = new List<Weather>()
             {
                 new Weather("Суми", 4, "Січень", -8, "Є", 915),
-                new Weather("Суми", 1, "Січень", -10, "Є", 920)
+                new Weather("Суми", 1, "Січень", -10, "Нема", 760),
+                new Weather("Суми", 3, "Січень", -3, "Нема", 720)
             };
 
             var target = new MainWindow();
@@ -26,6 +27,7 @@ namespace cloudy.Tests
             RoutedEventArgs e = null;
 
             target.MainWindow_Loaded(sender, e);
+            target.Hide();
 
             DataAccess dataAccess = new DataAccess();
             List<Weather> actual = dataAccess.SelectXY("Суми", "Січень");
@@ -46,8 +48,7 @@ namespace cloudy.Tests
         {
             List<string> expected = new List<string>()
             {
-                "Краснопілля",
-                "Львів", 
+                "Краснопілля", 
                 "Суми",
                 "Київ"
             };
@@ -57,6 +58,7 @@ namespace cloudy.Tests
             RoutedEventArgs e = null;
 
             target.MainWindow_Loaded(sender, e);
+            target.Hide();
 
             List<string> actual = MainWindow.cityList;
             for (int i = 0; i < actual.Count; i++)
@@ -70,8 +72,7 @@ namespace cloudy.Tests
         {
             List<Weather> expected = new List<Weather>()
             {
-                new Weather("Краснопілля", 8, "Січень", 1, "Є", 900),
-                new Weather("Львів", 5, "Лютий", 1, "Є", 900)
+                new Weather("Краснопілля", 8, "Січень", 1, "Є", 900)
             };
 
             var target = new MainWindow();
@@ -83,7 +84,7 @@ namespace cloudy.Tests
             DataAccess dataAccess = new DataAccess();
             List<Weather> actual = dataAccess.GetRainData();
 
-            for (int i = 0; i < actual.Count; i++)
+            for (int i = 0; i < expected.Count; i++)
             {
                 Assert.AreEqual(expected[i].city, actual[i].city);
                 Assert.AreEqual(expected[i].day, actual[i].day);
@@ -92,6 +93,7 @@ namespace cloudy.Tests
                 Assert.AreEqual(expected[i].precipitation, actual[i].precipitation);
                 Assert.AreEqual(expected[i].pressure, actual[i].pressure);
             }
+            target.Close();
         }
     }
 }
