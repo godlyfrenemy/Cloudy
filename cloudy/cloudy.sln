@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cloudy", "cloudy\cloudy.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cloudyTests", "cloudyTests\cloudyTests.csproj", "{E4BA730F-7847-4687-BF86-DD1FA6F2B43A}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup_Cloudy", "Setup_Cloudy\Setup_Cloudy.vdproj", "{5A73E596-D6AB-40D9-8A39-C10FBEBA81F6}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup_Cloudy", "Setup_Cloudy\Setup_Cloudy.vdproj", "{E0201424-65EC-47A1-B136-DD6143E33E5E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,8 +23,8 @@ Global
 		{E4BA730F-7847-4687-BF86-DD1FA6F2B43A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E4BA730F-7847-4687-BF86-DD1FA6F2B43A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E4BA730F-7847-4687-BF86-DD1FA6F2B43A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5A73E596-D6AB-40D9-8A39-C10FBEBA81F6}.Debug|Any CPU.ActiveCfg = Debug
-		{5A73E596-D6AB-40D9-8A39-C10FBEBA81F6}.Release|Any CPU.ActiveCfg = Release
+		{E0201424-65EC-47A1-B136-DD6143E33E5E}.Debug|Any CPU.ActiveCfg = Debug
+		{E0201424-65EC-47A1-B136-DD6143E33E5E}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
