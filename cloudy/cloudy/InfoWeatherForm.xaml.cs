@@ -57,7 +57,7 @@ namespace cloudy
             WeatherTable.Items.Clear();
         }
 
-        private void ClearBoxes()
+        private void ClearEditForm()
         {
             city_box.Text = String.Empty;
             day_box.Text = String.Empty;
@@ -103,7 +103,7 @@ namespace cloudy
             {
                 List<Weather> result = dataAccess.GetWeathers();
                 ClearList();
-                ClearBoxes();
+                ClearEditForm();
                 city_x.Items.Clear();
                 cityList.Clear();
 
@@ -150,7 +150,7 @@ namespace cloudy
             }
         }
 
-        private bool DeleteFromList(Weather weather)
+        private bool DeleteWeather(Weather weather)
         {
             try
             {
@@ -171,7 +171,7 @@ namespace cloudy
             }
         }
 
-        private void AddWeather(object sender, RoutedEventArgs e)
+        private void AddWeather()
         {
             try
             {
@@ -181,7 +181,7 @@ namespace cloudy
                 if (result == 1)
                 {
                     LoadBase();
-                    ClearBoxes();
+                    ClearEditForm();
                 }
                 else if(result == 0)
                 {
@@ -209,20 +209,20 @@ namespace cloudy
                 }
                 if(WeatherTable.SelectedItem == null)
                 {
-                    AddWeather(sender, e);
+                    AddWeather();
                 }
                 else
                 {
-                    if(DeleteFromList(selectedWeather))
+                    if(DeleteWeather(selectedWeather))
                     {
-                        AddWeather(sender, e);
+                        AddWeather();
                     }
                     else
                     {
                         throw new Exception("Не вдалось відредагувати запис");
                     }
                 }
-                ClearBoxes();
+                ClearEditForm();
                 WeatherTable.SelectedItem = null;
             }
             catch (Exception ex)
@@ -252,10 +252,10 @@ namespace cloudy
                     throw new Exception();
                 }
 
-                DeleteFromList(selectedWeather);
+                DeleteWeather(selectedWeather);
 
                 LoadBase();
-                ClearBoxes();
+                ClearEditForm();
                 WeatherTable.SelectedItem = null;
             }
             catch
@@ -351,7 +351,7 @@ namespace cloudy
 
                 if (selectedWeather == null)
                 {
-                    ClearBoxes();
+                    ClearEditForm();
                     return;
                 }
 
