@@ -114,7 +114,7 @@
                     </Style>
                 </DataGrid.Resources>
             </DataGrid>
-            <Grid x:Name="EditForm" Grid.Row="1" Grid.Column="1" >
+            <Grid x:Name="EditForm" Grid.Row="1" Visibility="Hidden" Grid.Column="1" >
                 <Grid Margin="11,19,20,19.8" HorizontalAlignment="Center">
 
                     <Grid.RowDefinitions>
@@ -204,7 +204,7 @@
             <Button x:Name="SearchButton" MaxWidth="120" Margin="0,15,227,20" MaxHeight="60" FontFamily="Comic Sans MS" Content="Пошук" ClickMode="Press" Grid.Column="1" Click="SearchButton_Click" MinWidth="120" HorizontalAlignment="Right"/>
             <Button x:Name="SearchRainButton" MaxWidth="120" Margin="349.2,15,10,20" MaxHeight="60" FontFamily="Comic Sans MS" Content="Пошук днів з дощем" ClickMode="Press" Grid.Column="1" MinWidth="200" Click="SearchRainButton_Click" HorizontalAlignment="Right"/>
 
-            <Grid x:Name="UserForm" Visibility="Hidden" Grid.Row="1" Grid.Column="1" Margin="0.2,20,10,-0.2">
+            <Grid x:Name="UserForm" Grid.Row="1" Grid.Column="1" Margin="0.2,20,10,-0.2">
                 <Button x:Name="LogInButton" Content="ВХІД" HorizontalAlignment="Center" Height="55" Margin="162,421,162,109" VerticalAlignment="Center" Width="225" Click="LogInButton_Click" Background="#FFF2C2DA" FontSize="20" FontWeight="Bold"/>
                 <Button x:Name="ReportButton" Content="Створити звіт" HorizontalAlignment="Center" Height="55" Margin="162,481,162,49" VerticalAlignment="Center" Width="225" Click="ReportButton_Click" Background="#FFF2C2DA" FontSize="20" FontWeight="Bold"/>
                 <TextBox Text="УВІЙДІТЬ ДЛЯ ДОСТУПУ ДО ВСІХ ФУНКЦІЙ" Template="{StaticResource Rounded}" FontSize="18" TextWrapping="Wrap" TextAlignment="Center" HorizontalAlignment="Center" Width="380" Background="#FFB9A5CF" VerticalContentAlignment="Center" Height="60" VerticalAlignment="Top" Margin="83,356,86,0"/>

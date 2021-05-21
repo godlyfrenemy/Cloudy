@@ -15,11 +15,11 @@ namespace cloudy
 
         string filePath;
 
-        public void WriteData(List<Weather> selectXY, List<Weather> rainData)
+        public bool WriteData(List<Weather> selectXY, List<Weather> rainData)
         {
             try
             {
-                filePath = Environment.CurrentDirectory.ToString();
+                filePath = AppDomain.CurrentDomain.BaseDirectory.ToString();
                 wordApp = new Microsoft.Office.Interop.Word.Application();
 
                 wordDoc = wordApp.Documents.Add(filePath + "\\Шаблон_Пошуку.dotx");
@@ -29,6 +29,7 @@ namespace cloudy
                 MainWindow.ErrorShow(ex.Message + char.ConvertFromUtf32(13) +
                     "Помістіть файл Шаблон_Пошуку.dotx" + char.ConvertFromUtf32(13) +
                     "у каталог із ехе-файлом програми і повторіть збереження", "Помилка");
+                return false;
             }
 
             try
@@ -46,8 +47,9 @@ namespace cloudy
             {
                 MainWindow.ErrorShow(ex.Message + char.ConvertFromUtf32(13) +
                     "Помилка збереження відібраних даних", "Помилка");
-
+                return false;
             }
+            return true;
         }
 
         private void ReplaceText(string textToReplace, string replacedText)
@@ -113,7 +115,7 @@ namespace cloudy
             {
                 result += weathers[i].temperature;
             }
-            return result / weathers.Count;
+            return Math.Round(result / weathers.Count, 3);
         }
 
         private double AveragePres(List<Weather> weathers)
@@ -127,7 +129,7 @@ namespace cloudy
             {
                 result += weathers[i].pressure;
             }
-            return result / weathers.Count;
+            return Math.Round(result / weathers.Count, 3);
         }
     }
 }
